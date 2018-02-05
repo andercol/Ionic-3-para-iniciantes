@@ -1,4 +1,4 @@
-import { Http } from '@angular/http';
+//import { Http } from '@angular/http';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MoovieProvider } from '../../providers/moovie/moovie';
@@ -29,6 +29,8 @@ export class FeedPage {
     time_comments: "11h ago"
   }
 
+  public lista_filmes = new Array<any>();
+
   public nome_usuario:string ="Anderson Colin";
 
   constructor(
@@ -43,15 +45,27 @@ export class FeedPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad FeedPage');
-    //this.somaDoisNumeros(10, 99);
     this.movieProvider.getLatestMovies().subscribe(
-      data =>{
-        console.log(data);
-      }, error =>{
+      data => {
+        console.log((data));
+      }, error => {
         console.log(error);
       }
     )
+
+
+
+    /*console.log('ionViewDidLoad FeedPage');
+    //this.somaDoisNumeros(10, 99);
+    this.movieProvider.getLatestMovies().subscribe(
+      data =>{
+        const response = (data as any);
+          const objeto_retorno = JSON.parse(response._body);
+        console.log(objeto_retorno);
+      }, error =>{
+        console.log(error);
+      }
+    )*/
   }
 
 }
