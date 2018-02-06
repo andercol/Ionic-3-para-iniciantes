@@ -16,7 +16,7 @@ export class MoovieProvider {
   }
 
   getLatestMovies() {
-      return this.http.get(this.baseApiPath + `/movie/popular?api_key=` + this.getApiKey());
+      return this.http.get(this.baseApiPath + `/movie/popular?api_key=` + this.getApiKey() + `&language=pt-BR`);
   }
 
   getApiKey(): string{
