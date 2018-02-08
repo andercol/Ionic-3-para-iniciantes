@@ -1,3 +1,5 @@
+import { FilmeDetalhesPage } from './../filme-detalhes/filme-detalhes';
+
 //import { Http } from '@angular/http';
 import { Component } from "@angular/core";
 import {
@@ -72,6 +74,11 @@ export class FeedPage {
   // ionViewDidLoad - só carrega uma vez
   ionViewDidEnter() {
     this.carregarFilmes();
+  }
+
+  abrirDetalhes(filme){
+    console.log(filme);
+    this.navCtrl.push(FilmeDetalhesPage, { id: filme.id });
   }
 
   carregarFilmes(){
