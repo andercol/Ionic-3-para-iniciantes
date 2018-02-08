@@ -15,6 +15,10 @@
 
 <ion-content padding>
 
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-card *ngFor="let filme of lista_filmes">
 
     <ion-item>
@@ -46,7 +50,7 @@
       </ion-col>
       <ion-col center text-center>
         <ion-note>
-            {{ objeto_feed.time_comments }}
+          {{ objeto_feed.time_comments }}
         </ion-note>
       </ion-col>
     </ion-row>
