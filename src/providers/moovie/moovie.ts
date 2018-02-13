@@ -15,12 +15,16 @@ export class MoovieProvider {
     console.log('Hello MoovieProvider Provider');
   }
 
-  getLatestMovies() {
-      return this.http.get(this.baseApiPath + `/movie/popular?api_key=` + this.getApiKey() + `&language=pt-BR`);
+  getLatestMovies(page = 1) {
+      return this.http.get(this.baseApiPath + `/movie/popular?page=${page}&api_key=` + this.getApiKey() + `&language=pt-BR`);
   }
 
   getMovieDetails(filmeid) {
     return this.http.get(this.baseApiPath + `/movie/${filmeid}?api_key=` + this.getApiKey() + `&language=pt-BR`);
+}
+
+getMovieImages(filmeid) {
+  return this.http.get(this.baseApiPath + `/movie/${filmeid}/images?api_key=` + this.getApiKey());
 }
 
   getApiKey(): string{

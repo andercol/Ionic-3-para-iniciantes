@@ -34,12 +34,14 @@ export class FeedPage {
   };
 
   public lista_filmes = new Array<any>();
+  public page = 1;
 
   public nome_usuario: string = "Anderson Colin";
 
   public loader;
   public refresher;
   public isrefreshing: boolean = false;
+  public infiniteScroll;
 
   constructor(
     public navCtrl: NavController,
@@ -81,16 +83,27 @@ export class FeedPage {
     this.navCtrl.push(FilmeDetalhesPage, { id: filme.id });
   }
 
-  carregarFilmes(){
+  doInfinite(infiniteScroll) {
+    this.page++;
+    this.infiniteScroll = infiniteScroll;
+    this.carregarFilmes(true);
+  }
+
+  carregarFilmes(newPage: boolean = false){
 
     this.abreCarregando();
-    this.movieProvider.getLatestMovies().subscribe(
+    this.movieProvider.getLatestMovies(this.page).subscribe(
       data => {
         const response = data as any;
-        //const objeto_retorno = JSON.parse(response._body);
-        this.lista_filmes = response.results;
 
-        console.log(this.lista_filmes);
+        if(newPage){
+          this.lista_filmes = this.lista_filmes.concat(response.results);
+          this.infiniteScroll.complete();
+        }else{
+          this.lista_filmes = response.results;
+        }
+
+        //console.log(this.lista_filmes);
 
         this.fechaCarregando();
         if (this.isrefreshing) {

@@ -19,6 +19,8 @@ export class FilmeDetalhesPage {
 
   public filme;
   public filmeid;
+  public filmeImg;
+  public listaimg = new Array<any>();
 
   constructor(
     public navCtrl: NavController,
@@ -36,6 +38,19 @@ export class FilmeDetalhesPage {
         let retorno = data as any;
         this.filme = retorno;
 
+      },error =>{
+        console.log(error);
+      }
+    )
+
+    this.movieProvider.getMovieImages(this.filmeid).subscribe(
+      data => {
+
+        let retorno = data as any;
+        this.filmeImg = retorno;
+        console.log("getMovieImages ");
+        this.listaimg = retorno.backdrops;
+        console.log(this.listaimg);
       },error =>{
         console.log(error);
       }
