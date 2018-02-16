@@ -1,6 +1,8 @@
+
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MoovieProvider } from '../../providers/moovie/moovie';
+//import * as Vibrant from 'node-vibrant';
 
 /**
  * Generated class for the FilmeDetalhesPage page.
@@ -17,10 +19,12 @@ import { MoovieProvider } from '../../providers/moovie/moovie';
 })
 export class FilmeDetalhesPage {
 
+  public _Vibrant = require('node-vibrant');
   public filme;
   public filmeid;
   public filmeImg;
   public listaimg = new Array<any>();
+  public colorThief = new Array<any>();
 
   constructor(
     public navCtrl: NavController,
@@ -28,6 +32,7 @@ export class FilmeDetalhesPage {
     public movieProvider: MoovieProvider
   ) {
   }
+
 
   ionViewDidEnter() {
     this.filmeid = this.navParams.get("id"); //navParams pega todos os parametros que foram passados.
@@ -38,10 +43,23 @@ export class FilmeDetalhesPage {
         let retorno = data as any;
         this.filme = retorno;
 
+        let v = this._Vibrant.from('https://image.tmdb.org/t/p/w300/' + this.filme.poster_path);
+        v.getPalette((err, palette) => console.log(palette))
+        v.getPalette((err, palette) => {
+          console.log("xxxxxxxxxxxxxxx");
+          console.log(palette.DarkVibrant._rgb[0]);
+          let retorno = palette;
+          this.colorThief = retorno;
+        }) ;
+        //this.colorThief = new ColorThief().getColor('https://image.tmdb.org/t/p/w300/' + this.filme.poster_path);
+        console.log(this.colorThief);
+
       },error =>{
         console.log(error);
       }
     )
+
+
 
     this.movieProvider.getMovieImages(this.filmeid).subscribe(
       data => {
@@ -55,6 +73,7 @@ export class FilmeDetalhesPage {
         console.log(error);
       }
     )
+
   }
 
 }

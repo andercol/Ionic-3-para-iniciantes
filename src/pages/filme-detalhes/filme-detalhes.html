@@ -5,6 +5,16 @@
   Ionic pages and navigation.
 -->
 
+
+<script>
+  var img = "'https://image.tmdb.org/t/p/w500/' + img.file_path'";
+  teste(img);
+ /*console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX ");
+  var colorThief = new ColorThief();
+  colorThief.getColor("'https://image.tmdb.org/t/p/w500/' + img.file_path'");
+  console.log("a cor é: " + colorThief);*/
+</script>
+
 <ion-header>
 
   <ion-navbar>
@@ -31,14 +41,16 @@
 
     </ion-slides>
     <ion-row>
-      <div col-4>
-      <img [src]="'https://image.tmdb.org/t/p/w300/' + filme.poster_path" class="poster">
+      <div class="faixa-title" col-4 ng-style="{'background-color': 'rgb('+palette.LightVibrant._rgb[0]+', '+palette.LightVibrant._rgb[1]+', '+palette.LightVibrant._rgb[2]+')'}">
+      <div>
+      <img [src]="'https://image.tmdb.org/t/p/w300/' + filme.poster_path" class="poster" ig="imgposter" color-thief color-thief-dominant="colors.myDominantColor">
       </div>
     <ion-item col-8>
 
         <h1 class="feed_title">{{ filme.title }} ({{ filme.release_date | date :"yyyy" }}) </h1>
         <!--<p class="feed_date">{{ filme.release_date }}</p>-->
       </ion-item>
+    </div>
     </ion-row>
 
     <ion-card-content>
